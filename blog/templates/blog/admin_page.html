@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% block breadcrumb %}{{ block.super }} > Admin{% endblock %}
+
+{% block content %}
+
+    <div class="blog-table">
+        <h2><a href="{% url 'add_post' %}">&#9997 Create New Post</a></h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            {% for post in posts %}
+                <tr>
+                <td>{{ post.title }}</td>
+                <td><a href="{% url 'blog:post_update' post.slug %}">&#9998 Edit</a></td>
+                <td><a href="{% url 'blog:article-delete' post.slug %}">&#128465 Delete</a></td>
+            </tr>
+            {% endfor %}
+
+
+        </table>
+                    
+    </div>
+
+    {% include 'blog/pagination_links.html' %}
+
+{% endblock %}
